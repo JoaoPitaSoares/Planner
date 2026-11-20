@@ -335,6 +335,7 @@ const ITEMS={
  parede:{l:'Rugby solo · parede',h:'20 min',go:'rugby',i:'ball',c:'rugby'},
  livroS:{l:'Livro',h:'25 min ao almoço',m:'palavras',i:'pen',c:'mente'},
  livroL:{l:'Livro · sessão longa',h:'90 min',m:'palavras',i:'pen',c:'mente'},
+ livroM:{l:'Livro',h:'de manhã · 60 min',m:'palavras',i:'pen',c:'mente'},
  candS:{l:'Candidaturas',h:'25 min ao almoço · enviar 1–2',m:'enviadas',i:'bag',c:'carreira'},
  candL:{l:'Candidaturas',h:'45 min · escolher vagas e enviar',m:'enviadas',i:'bag',c:'carreira'},
  amigos:{l:'Amigos',h:'noite livre',i:'users',c:'social'},
@@ -380,11 +381,11 @@ const deload=()=>cycleWeek(today())===3;
 const cycText=ds=>cycleWeek(ds)===3?'Semana leve':'Semana '+(cycleWeek(ds)+1)+' de 4';
 function planFor(ds){
  const d=parse(ds).getDay(),club=+((S.cw&&S.cw[iso(monday(parse(ds)))])||S.set.club)===5?5:4,free=club===4?5:4,game=+S.set.game;
- const P={0:[],1:['clube'],2:['livroS','campo','clube'],3:['candS'],4:['livroS'],5:[],6:[]};
+ const P={0:[],1:['clube'],2:['campo','clube'],3:['candS'],4:[],5:[],6:[]};
  P[club].push('clube');P[free].push('amigos');
- if(game===0){P[3].push('gymA');P[6].push('gymB','parede','livroL','candL');P[0].push('proj','jogo','plano');}
- else if(game===6){P[3].push('gymB');P[6].push('proj','jogo');P[0].push('gymA','parede','livroL','candL','plano');}
- else{P[3].push('gymB');P[6].push('proj','gymC','parede','amigos');P[0].push('gymA','livroL','candL','plano');}
+ if(game===0){P[3].push('gymA');P[6].push('gymB','parede','livroL','candL');P[0].push('livroM','proj','jogo','plano');}
+ else if(game===6){P[3].push('gymB');P[6].push('livroM','proj','jogo');P[0].push('gymA','parede','livroL','candL','plano');}
+ else{P[3].push('gymB');P[6].push('livroM','proj','gymC','parede','amigos');P[0].push('gymA','livroL','candL','plano');}
  return P[d].concat('leitura');
 }
 function hintFor(id,ds){
